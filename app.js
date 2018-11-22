@@ -3,7 +3,6 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
-const PORT = 4040;
 const path = require('path');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -43,20 +42,28 @@ app.post('/feedback', jsonParser, (req, res) => {
   // let username = req.body.username;
   // let created_at = req.body.created_at;
 
-  if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
-      if (err) {
-        console.log(`Database error POST`);
-        res.status(500).send(err.message);
-        return;
-      } else {
-        res.status(200).json({
-          result,
-        })
-      }
-    })
+  let token = req.body.token;
+  let mmToken = 1111;
+
+  if (token === mmToken) {
+    if (rating && feeling && finished && energy) {
+      conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
+        if (err) {
+          console.log(`Database error POST`);
+          res.status(500).send(err.message);
+          return;
+        } else {
+          res.status(200).json({
+            result,
+          })
+        }
+      })
+    }
+  } else {
+    console.log(`Invalid authentication`);
+    res.status(400).send(err.message);
+    return;
   }
 })
-
 
 module.exports = app;
