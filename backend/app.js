@@ -1,18 +1,19 @@
 'use strict'
 
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
+const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const conn = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
+  host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
+  user: 'mattermostdb',
+  password: 'mattermost',
+  database: 'mattermost',
 });
 
 conn.connect((err) => {
@@ -28,23 +29,24 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended : false }));
 
 app.post('/feedback', jsonParser, (req, res) => {
-  let rating = req.body.rating;
-  let feeling = req.body.feeling;
-  let finished = req.body.finished;
-  let energy = req.body.energy;
-  let favorite = req.body.favorite;
-  let feedback = req.body.feedback;
-  let hardest = req.body.hardest;
-  let is_relevant = req.body.is_relevant;
-  let whatlearned = req.body.whatlearned;
-  // let channel = req.body.channel;
-  // let username = req.body.username;
-  // let created_at = req.body.created_at;
+  let model = req.body.model
+  let rating = model.rating;
+  let feeling = model.feeling;
+  let finished = model.finished;
+  let energy = model.energy;
+  let favorite = model.favorite;
+  let feedback = model.feedback;
+  let hardest = model.hardest;
+  let is_relevant = model.is_relevant;
+  let whatlearned = model.whatlearned;
+  // let channel = model.channel;
+  // let username = model.username;
+  // let created_at = model.created_at;
 
   let token = req.body.token;
   let mmToken = 1111;
 
-  if (token === mmToken) {
+  // if (token === mmToken) {
     if (rating && feeling && finished && energy) {
       conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
         if (err) {
@@ -58,11 +60,11 @@ app.post('/feedback', jsonParser, (req, res) => {
         }
       })
     }
-  } else {
-    console.log(`Invalid authentication`);
-    res.status(400).send(err.message);
-    return;
-  }
+  // } else {
+  //   console.log(`Invalid authentication`);
+  //   res.status(400).send(err.message);
+  //   return;
+  // }
 })
 
 module.exports = app;
