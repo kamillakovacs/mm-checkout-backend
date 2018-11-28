@@ -26,7 +26,7 @@ conn.connect((err) => {
 
 app.use('/assets', express.static('assets'));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended : false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
@@ -47,24 +47,42 @@ app.post('/feedback', jsonParser, (req, res) => {
   let mmToken = 1111;
 
   // if (token === mmToken) {
-    if (rating && feeling && finished && energy) {
-      conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
-        if (err) {
-          console.log(`Database error POST`);
-          res.status(500).send(err.message);
-          return;
-        } else {
-          res.status(200).json({
-            result,
-          })
-        }
-      })
-    }
+  if (rating && feeling && finished && energy) {
+    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
+      if (err) {
+        console.log(`Database error POST`);
+        res.status(500).send(err.message);
+        return;
+      } else {
+        res.status(200).json({
+          result,
+        })
+      }
+    })
+  }
   // } else {
   //   console.log(`Invalid authentication`);
   //   res.status(400).send(err.message);
   //   return;
   // }
 })
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/daily-feedback', (req, res) => {
+  conn.query(`SELECT * FROM checkout`, (err, result) => {
+    if (err) {
+      console.log(`Database error daily-feedback`);
+      res.status(500).send(err.message);
+      return;
+    } else {
+      res.status(200).json({
+        result,
+      })
+    }
+  })
+});
 
 module.exports = app;
