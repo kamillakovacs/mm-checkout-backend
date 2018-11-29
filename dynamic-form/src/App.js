@@ -4,11 +4,11 @@ import DynamicForm from './components/DynamicForm';
 
 class App extends Component {
   state = {
-    data: [
-      {energy: 1, favorite: 2, feeling: 3, rating: 4},
-      {energy: 1, favorite: 2, feeling: 3, rating: 4},
-      {energy: 1, favorite: 2, feeling: 3, rating: 4},
-      ] 
+    // data: [
+    //   {energy: 1, favorite: 2, feeling: 3, rating: 4},
+    //   {energy: 1, favorite: 2, feeling: 3, rating: 4},
+    //   {energy: 1, favorite: 2, feeling: 3, rating: 4},
+    //   ] 
   }
   
   callBackendAPI = async () => {
@@ -42,10 +42,14 @@ class App extends Component {
        <DynamicForm className="form"
         title = "Feedback" 
         model = {[
-          {key: "energy", label: "Energy", type: "number", props: {required: true}},
-          {key: "favorite", label: "Favorite", type: "number", props: {required: true}},
-          {key: "feeling", label: "Feeling", type: "number", props: {required: true}},
-          {key: "rating", label: "Rating", type: "number", props: {required: true}},
+          {key: "rating", label: "Workshop rating ", type: "number", props: {required: true}},
+          {key: "feeling", label: "Feeling ", type: "number", props: {required: true}},
+          {key: "finished", label: "Finished ", type: "number", props: {required: true}},
+          {key: "energy", label: "Energy input ", type: "number", props: {required: true}},
+          {key: "favorite", label: "Favorite (optional) ", type: "number"},
+          {key: "hardest", label: "Hardest (optional) ", type: "number"},
+          {key: "whatlearned", label: "What new did you learn? (optional) ", type: "number"},
+          {key: "feedback", label: "Feedback (optional) ", type: "number"},
         ]}
         onSubmit = {(model) => {this.onSubmit(model)}}
        />
