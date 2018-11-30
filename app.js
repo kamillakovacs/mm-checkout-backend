@@ -28,6 +28,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
   let rating = model.rating;
@@ -48,7 +52,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 
   // if (token === mmToken) {
   if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
+    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned) values (?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearne], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
         res.status(500).send(err.message);
@@ -66,10 +70,6 @@ app.post('/feedback', jsonParser, (req, res) => {
   //   return;
   // }
 })
-
-app.get('/', (req, res) => {g
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 app.get('/daily-feedback', (req, res) => {
   conn.query(`SELECT DISTINCT channel FROM checkout`, (err, result) => {
