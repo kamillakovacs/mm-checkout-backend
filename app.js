@@ -1,5 +1,6 @@
 'use strict'
 
+// require('dotenv').config()
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -26,11 +27,6 @@ conn.connect((err) => {
 app.use('/assets', express.static('assets'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
@@ -71,6 +67,10 @@ app.post('/feedback', jsonParser, (req, res) => {
   // }
 })
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.get('/daily-feedback', (req, res) => {
   conn.query(`SELECT DISTINCT channel FROM checkout`, (err, result) => {
     if (err) {
@@ -84,5 +84,19 @@ app.get('/daily-feedback', (req, res) => {
     }
   })
 });
+
+
+app.get('/checkouts/:channel', (req, res) => {
+  conn.query(`SELECT * FROM checkout WHERE channel='${req.params.channel}';`, function (err, results) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error');
+      return;
+    }
+    res.status(200).json({
+      results,
+    });
+  });
+})
 
 module.exports = app;
