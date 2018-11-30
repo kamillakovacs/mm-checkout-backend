@@ -27,10 +27,11 @@ app.use('/assets', express.static('assets'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-
 
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
@@ -52,6 +53,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 
   // if (token === mmToken) {
   if (rating && feeling && finished && energy) {
+  // if channel name not in database, enter into database here, and insert feedback. otherwise only insert feedback
     conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
@@ -84,5 +86,19 @@ app.get('/daily-feedback', (req, res) => {
     }
   })
 });
+
+app.get('/checkouts/:channel', (req, res) => {
+  conn.query(`SELECT * FROM checkout WHERE channel='${req.params.channel}';`, function (err, results) {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('Database error');
+      return;
+    }
+    res.render('channelinfo', {
+      results,
+    });
+  });
+})
+
 
 module.exports = app;
