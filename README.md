@@ -3,13 +3,13 @@
 # Project steps:
 
 ## Backend: 
-1. Send POST request with feedback to database 
+1. Send POST request with feedback to database - done, but has to include all fields for database to take it in
 2. Ensure authentication works
 
 ## Frontend: 
-1. Create checkout form as Mattermost plugin 
+1. Create checkout form as Mattermost slash command
 2. Use React :) 
-3. Ensure numbers and scripts all in one form  
+3. Ensure numbers and scripts all in one form 
 4. Ensure form appears when button in channel is clicked 
 5. Ensure that pressing submit button sends feedback to backend to submit to database, with correct body names 
 6. Make it pretty :)
