@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/daily-feedback', (req, res) => {
-  conn.query(`SELECT * FROM checkout`, (err, result) => {
+  conn.query(`SELECT DISTINCT channel FROM checkout`, (err, result) => {
     if (err) {
       console.log(`Database error daily-feedback`);
       res.status(500).send(err.message);
