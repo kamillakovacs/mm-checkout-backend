@@ -1,6 +1,5 @@
 'use strict'
 
-// require('dotenv').config()
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -27,6 +26,7 @@ conn.connect((err) => {
 app.use('/assets', express.static('assets'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set('view engine', 'ejs');
 
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
@@ -67,7 +67,7 @@ app.post('/feedback', jsonParser, (req, res) => {
   // }
 })
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {g
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
@@ -92,10 +92,10 @@ app.get('/checkouts/:channel', (req, res) => {
       res.status(500).send('Database error');
       return;
     }
-    res.status(200).json({
+    res.render('channelinfo', {
       results,
     });
   });
-})
+});
 
 module.exports = app;
