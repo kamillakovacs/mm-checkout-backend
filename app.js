@@ -27,6 +27,11 @@ app.use('/assets', express.static('assets'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+
 app.post('/feedback', jsonParser, (req, res) => {
   let model = req.body.model
   let rating = model.rating;
@@ -66,10 +71,6 @@ app.post('/feedback', jsonParser, (req, res) => {
   // }
 })
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 app.get('/daily-feedback', (req, res) => {
   conn.query(`SELECT * FROM checkout`, (err, result) => {
     if (err) {
@@ -83,5 +84,9 @@ app.get('/daily-feedback', (req, res) => {
     }
   })
 });
+
+
+
+app.get(`/checkouts/${channel}` )
 
 module.exports = app;

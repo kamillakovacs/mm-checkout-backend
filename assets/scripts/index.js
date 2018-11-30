@@ -3,7 +3,6 @@
 window.onload = () => {
   const URL = 'http://ec2-18-234-187-37.compute-1.amazonaws.com:3000/daily-feedback';
 
-
   fetch(URL)
     .then(resp => resp.json())
     .then(response => {
