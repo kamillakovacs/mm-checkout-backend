@@ -8,8 +8,6 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   jsonParser = bodyParser.json();
 
-
-
 const conn = mysql.createConnection({
   host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
   user: 'mattermostdb',
@@ -64,14 +62,14 @@ app.post('/feedback', jsonParser, (req, res) => {
   // }
 })
 
-app.get('/link', (req, res) => {
-  { username, channel_name } = req.params;
-  console.log(`${username}, ${channel_name}`);
-  res.json({
-    "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
-    "message": "Click on the link to submit your feedback."
-  });
-});
+// app.get('/link', (req, res) => {
+//   { username, channel_name } = req.params;
+//   console.log(`${username}, ${channel_name}`);
+//   res.json({
+//     "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
+//     "message": "Click on the link to submit your feedback."
+//   });
+// });
 
 
 app.get('/daily-feedback', (req, res) => {
@@ -98,6 +96,7 @@ app.get('/checkouts/:channel', (req, res) => {
     res.render('channelinfo', {
       results,
     });
+    console.log(results[0].channel)
   });
 });
 

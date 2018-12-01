@@ -15,7 +15,6 @@ window.onload = () => {
         let newA = document.createElement('a')
         newA.setAttribute('href', `/checkouts/${element.channel}`);
         newChannel.appendChild(newA);
-        console.log(newA);
         newA.innerText = element.channel;
       });
     });
