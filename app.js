@@ -1,7 +1,8 @@
 'use strict'
 
 const express = require('express'),
-  app = express(),  mysql = require('mysql'),
+  app = express(),  
+  mysql = require('mysql'),
   path = require('path'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
