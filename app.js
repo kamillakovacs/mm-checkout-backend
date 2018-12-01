@@ -29,30 +29,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+  const incoming = req.body;
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  let model = req.body.model
-  let rating = model.rating;
-  let feeling = model.feeling;
-  let finished = model.finished;
-  let energy = model.energy;
-  let favorite = model.favorite;
-  let feedback = model.feedback;
-  let hardest = model.hardest;
-  let is_relevant = model.is_relevant;
-  let whatlearned = model.whatlearned;
+  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.model;
   // let channel = model.channel;
   // let username = model.username;
   // let created_at = model.created_at;
-
   let token = req.body.token;
   let mmToken = 1111;
 
   // if (token === mmToken) {
   if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned) values (?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearne], (err, result) => {
+    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
         res.status(500).send(err.message);
