@@ -39,30 +39,11 @@
                   <form method="get" class="form-inline" action="directmessage">
                       <div class="form-group">
                           <div class="input-group mr-2">
-                              <span class="input-group-addon">on</span>
+                              <span class="input-group-addon"></span>
                               <select name="day" class="form-control custom-select border-left-0">
-                                  <option value="2018-11-15">2018-11-15</option>
-                                  <option value="2018-11-14">2018-11-14</option>
-                                  <option value="2018-10-30">2018-10-30</option>
-                                  <option value="2018-08-15">2018-08-15</option>
-                                  <option value="2018-08-14">2018-08-14</option>
-                                  <option value="2018-06-28">2018-06-28</option>
-                                  <option value="2018-06-26">2018-06-26</option>
-                                  <option value="2018-06-06">2018-06-06</option>
-                                  <option value="2018-05-31">2018-05-31</option>
-                                  <option value="2018-05-30">2018-05-30</option>
-                                  <option value="2018-05-29">2018-05-29</option>
-                                  <option value="2018-05-25">2018-05-25</option>
-                                  <option value="2018-05-24">2018-05-24</option>
-                                  <option value="2018-05-23">2018-05-23</option>
-                                  <option value="2018-05-17">2018-05-17</option>
-                                  <option value="2018-05-16">2018-05-16</option>
-                                  <option value="2018-05-15">2018-05-15</option>
-                                  <option value="2018-05-14">2018-05-14</option>
-                                  <option value="2018-05-11">2018-05-11</option>
-                                  <option value="2018-05-10">2018-05-10</option>
-                                  <option value="2018-05-09">2018-05-09</option>
-                                  <option value="2018-03-20">2018-03-20</option>
+                                <% results.forEach ( feedback => { %>                             
+                                    <option value=<%=`${feedback.created_at}`%>><%= feedback.created_at %></option>
+                                <% }) %>
                               </select>
                           </div>
                           <input type="submit" value="Go" class="form-control" />
@@ -73,8 +54,13 @@
       </div>
   </nav>
   <div class="container">
-      <div><h2 class="mt-3">Daily checkout for <span class="badge badge-primary"><%=results[0].channel %></span></h2></div>
-      <div><h3 class="mt-3">Sum of checkouts <span class="badge badge-danger">SUM OF CHECKOUTS</span></h3></div>
+      <div><h2 class="mt-3">Daily checkout for <span class="badge badge-primary"><%= feedbacklist[0].channel %></span></h2></div>
+      <% let sumCounter = 0; %>
+      <% feedbacklist.forEach ( feedback => { %>
+          <% sumCounter++ %>
+      <% }) %>
+      <div><h3 class="mt-3">Sum of checkouts <span class="badge badge-danger"><%=sumCounter%></span></h3></div>
+      
       <table class="table">
           <tr> 
               <th>Workshop rating</th>
@@ -86,19 +72,18 @@
               <th>Feedback</th>
               <th>What I learned today</th>
           </tr>
-            <% results.forEach ( channel => { %>
-                <tr>    
-                <td><%= channel.rating %></td>
-                <td><%= channel.feeling %></td>
-                <td><%= channel.finished %></td>
-                <td><%= channel.energy %></td>
-                <td><%= channel.favorite %></td>
-                <td><%= channel.hardest %></td>
-                <td><%= channel.feedback %></td>
-                <td><%= channel.whatlearned %></td>
+            <% feedbacklist.forEach ( feedback => { %>
+            <tr>    
+                <td><%= feedback.rating %></td>
+                <td><%= feedback.feeling %></td>
+                <td><%= feedback.finished %></td>
+                <td><%= feedback.energy %></td>
+                <td><%= feedback.favorite %></td>
+                <td><%= feedback.hardest %></td>
+                <td><%= feedback.feedback %></td>
+                <td><%= feedback.whatlearned %></td>
+            </tr>
             <% }) %>
-          </tr>
-          
       </table>
   </div>
   </body>

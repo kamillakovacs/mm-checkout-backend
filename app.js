@@ -92,11 +92,19 @@ app.get('/checkouts/:channel', (req, res) => {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
-    }
-    res.render('channelinfo', {
-      results,
-    });
-    console.log(results[0].channel)
+    } else if (req.query.day) {
+      let filteredByDate = results.filter( feedback => {
+        return feedback.created_at.includes(req.query.day);
+      });
+      res.render('channelinfo', {
+        results,
+        feedbacklist: filteredByDate,
+      })
+    } else {
+      res.render('channelinfo', {
+        results,
+      });
+    }    
   });
 });
 
