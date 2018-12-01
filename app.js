@@ -64,7 +64,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 })
 
 app.get('/link', (req, res) => {
-  { username, channel_name }  = req.params;
+  { username, channel_name } = req.params;
   console.log(`${username}, ${channel_name}`);
   res.json({
     "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
