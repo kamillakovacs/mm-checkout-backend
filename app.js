@@ -1,12 +1,13 @@
 'use strict'
 
-const express = require('express');
-const app = express();
-const mysql = require('mysql');
-const path = require('path');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+const express = require('express'),
+  app = express(),  mysql = require('mysql'),
+  path = require('path'),
+  cors = require('cors'),
+  bodyParser = require('body-parser'),
+  jsonParser = bodyParser.json();
+
+
 
 const conn = mysql.createConnection({
   host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
