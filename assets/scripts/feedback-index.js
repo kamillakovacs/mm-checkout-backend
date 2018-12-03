@@ -1,7 +1,7 @@
 'use strict'
 
 window.onload = () => {
-  const URL = 'http://localhost:3000/daily-feedback';
+  const URL = 'http://mm-checkout.us-east-1.elasticbeanstalk.com/daily-feedback';
 
   fetch(URL)
     .then(resp => resp.json())

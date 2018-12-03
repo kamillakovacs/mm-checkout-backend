@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 
 app.post('/feedback', jsonParser, (req, res) => {
   const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.model;
+  console.log(req.body.model);
   // let channel = model.channel;
   // let username = model.username;
   // let created_at = model.created_at;
@@ -42,7 +43,7 @@ app.post('/feedback', jsonParser, (req, res) => {
   let mmToken = 1111;
 
   // if (token === mmToken) {
-  if (rating && feeling && finished && energy) {
+  // if (rating && feeling && finished && energy) {
     conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
@@ -54,7 +55,7 @@ app.post('/feedback', jsonParser, (req, res) => {
         })
       }
     })
-  }
+  // }
   // } else {
   //   console.log(`Invalid authentication`);
   //   res.status(400).send(err.message);
@@ -62,14 +63,14 @@ app.post('/feedback', jsonParser, (req, res) => {
   // }
 })
 
-// app.get('/link', (req, res) => {
-//   { username, channel_name } = req.params;
-//   console.log(`${username}, ${channel_name}`);
-//   res.json({
-//     "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
-//     "message": "Click on the link to submit your feedback."
-//   });
-// });
+app.get('/link', (req, res) => {
+  let { username, channel_name } = req.params;
+  console.log(`${username}, ${channel_name}`);
+  res.redirect({
+    "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
+    "message": "Click on the link to submit your feedback."
+  });
+});
 
 
 app.get('/daily-feedback', (req, res) => {
@@ -88,17 +89,16 @@ app.get('/daily-feedback', (req, res) => {
 
 app.get('/checkouts/:channel', (req, res) => {
   conn.query(`SELECT * FROM checkout WHERE channel='${req.params.channel}';`, function (err, results) {
+    let filteredByDate = results.filter( feedback => {
+      return feedback.created_at.includes(req.query.day);
+    });
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
-    } else if (req.query.day) {
-      let filteredByDate = results.filter( feedback => {
-        return feedback.created_at.includes(req.query.day);
-      });
+    } else if (req.query.day) { 
       res.render('channelinfo', {
-        results,
-        feedbacklist: filteredByDate,
+        results: filteredByDate,
       })
     } else {
       res.render('channelinfo', {
