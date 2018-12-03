@@ -121,7 +121,6 @@ app.get('/checkouts/:channel', (req, res) => {
         channel: channel,
       })
     } else if (!req.query.day) {
-      console.log('fuck')
       res.render('channelinfo', {
         results,
         days: uniqueDates,
