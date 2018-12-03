@@ -34,24 +34,24 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  let model = req.body.model
-  let rating = model.rating;
-  let feeling = model.feeling;
-  let finished = model.finished;
-  let energy = model.energy;
-  let favorite = model.favorite;
-  let feedback = model.feedback;
-  let hardest = model.hardest;
-  let is_relevant = model.is_relevant;
-  let whatlearned = model.whatlearned;
+  // let body = req.body
+  // let rating = body.rating;
+  // let feeling = body.feeling;
+  // let finished = body.finished;
+  // let energy = body.energy;
+  // let favorite = body.favorite;
+  // let feedback = body.feedback;
+  // let hardest = body.hardest;
+  // let is_relevant = body.is_relevant;
+  // let whatlearned = body.whatlearned;
   
-  // const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.model;
-  // console.log(req.body.model);
-  // let channel = model.channel;
-  // let username = model.username;
-  // let created_at = model.created_at;
-  // let token = req.body.token;
-  // let mmToken = 1111;
+  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body;
+  
+  // let channel = body.channel;
+  // let username = body.username;
+  // let created_at = body.created_at;
+  let token = req.body.token;
+  let mmToken = 1111;
 
   // if (token === mmToken) {
   // if (rating && feeling && finished && energy) {
