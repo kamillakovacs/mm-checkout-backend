@@ -34,13 +34,24 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.model;
-  console.log(req.body.model);
+  let model = req.body.model
+  let rating = model.rating;
+  let feeling = model.feeling;
+  let finished = model.finished;
+  let energy = model.energy;
+  let favorite = model.favorite;
+  let feedback = model.feedback;
+  let hardest = model.hardest;
+  let is_relevant = model.is_relevant;
+  let whatlearned = model.whatlearned;
+  
+  // const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.model;
+  // console.log(req.body.model);
   // let channel = model.channel;
   // let username = model.username;
   // let created_at = model.created_at;
-  let token = req.body.token;
-  let mmToken = 1111;
+  // let token = req.body.token;
+  // let mmToken = 1111;
 
   // if (token === mmToken) {
   // if (rating && feeling && finished && energy) {
@@ -89,20 +100,31 @@ app.get('/daily-feedback', (req, res) => {
 
 app.get('/checkouts/:channel', (req, res) => {
   conn.query(`SELECT * FROM checkout WHERE channel='${req.params.channel}';`, function (err, results) {
-    let filteredByDate = results.filter( feedback => {
+    let filteredByDate = results.filter(feedback => {
       return feedback.created_at.includes(req.query.day);
     });
+    let dates = results.map(feedback => feedback.created_at);
+    let uniqueDates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+    
+    let channel = req.params.channel
+
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
     } else if (req.query.day) { 
+      console.log('1234')
       res.render('channelinfo', {
         results: filteredByDate,
+        days: uniqueDates,
+        channel: channel,
       })
     } else {
+      console.log('2345')
       res.render('channelinfo', {
-        results,
+        results: results,
+        days: results,
+        channel: channel,
       });
     }    
   });
