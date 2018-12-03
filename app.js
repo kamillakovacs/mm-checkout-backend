@@ -103,6 +103,7 @@ app.get('/checkouts/:channel', (req, res) => {
     let filteredByDate = results.filter(feedback => {
       return feedback.created_at.includes(req.query.day);
     });
+
     let dates = results.map(feedback => feedback.created_at);
     let uniqueDates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
     
@@ -119,11 +120,11 @@ app.get('/checkouts/:channel', (req, res) => {
         days: uniqueDates,
         channel: channel,
       })
-    } else {
-      console.log('2345')
+    } else if (!req.query.day) {
+      console.log('fuck')
       res.render('channelinfo', {
-        results: results,
-        days: results,
+        results,
+        days: uniqueDates,
         channel: channel,
       });
     }    
