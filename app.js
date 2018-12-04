@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express'),
-  app = express(),  
+  app = express(),
   mysql = require('mysql'),
   path = require('path'),
   cors = require('cors'),
@@ -44,9 +44,9 @@ app.post('/feedback', jsonParser, (req, res) => {
   // let hardest = body.hardest;
   // let is_relevant = body.is_relevant;
   // let whatlearned = body.whatlearned;
-  
+
   const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body;
-  
+
   // let channel = body.channel;
   // let username = body.username;
   // let created_at = body.created_at;
@@ -75,11 +75,11 @@ app.post('/feedback', jsonParser, (req, res) => {
 })
 
 app.get('/link', (req, res) => {
-  let { username, channel_name } = req.params;
+  const { username, channel_name } = req.params;
   console.log(`${username}, ${channel_name}`);
   res.redirect({
-    "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
-    "message": "Click on the link to submit your feedback."
+    url: `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
+    message: 'Click on the link to submit your feedback.'
   });
 });
 
@@ -106,14 +106,14 @@ app.get('/checkouts/:channel', (req, res) => {
 
     let dates = results.map(feedback => feedback.created_at);
     let uniqueDates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-    
+
     let channel = req.params.channel
 
     if (err) {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
-    } else if (req.query.day) { 
+    } else if (req.query.day) {
       console.log('1234')
       res.render('channelinfo', {
         results: filteredByDate,
@@ -126,7 +126,7 @@ app.get('/checkouts/:channel', (req, res) => {
         days: uniqueDates,
         channel: channel,
       });
-    }    
+    }
   });
 });
 
