@@ -63,10 +63,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 app.get('/link', (req, res) => {
   let { username, channel_name } = req.params;
   console.log(`${username}, ${channel_name}`);
-  res.redirect({
-    "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
-    "message": "Click on the link to submit your feedback."
-  });
+  res.send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`)
 });
 
 app.get('/daily-feedback', (req, res) => {
