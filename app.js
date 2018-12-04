@@ -34,28 +34,30 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  const rating = Object.values(req.body)[0],
-    feeling = Object.values(req.body)[1],
-    finished = Object.values(req.body)[2],
-    energy = Object.values(req.body)[3],
-    favorite = Object.values(req.body)[4],
-    hardest = Object.values(req.body)[5],
-    whatlearned = Object.values(req.body)[6],
-    feedback = Object.values(req.body)[7];
+  console.log(req)
+  const rating = Object.values(req.body.data)[0],
+    feeling = Object.values(req.body.data)[1],
+    finished = Object.values(req.body.data)[2],
+    energy = Object.values(req.body.data)[3],
+    favorite = Object.values(req.body.data)[4],
+    hardest = Object.values(req.body.data)[5],
+    whatlearned = Object.values(req.body.data)[6],
+    feedback = Object.values(req.body.data)[7],
+    username = req.body.username,
+    channel = req.body.channel_name;
+    created_at = req.body.date;
 
-  if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback) values (?, ?, ?, ?, ?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback], (err, result) => {
-      if (err) {
-        console.log(`Database error POST`);
-        res.status(500).send(err.message);
-        return;
-      } else {
-        res.status(200).json({
-          result,
-        })
-      }
-    })
-  }
+  conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback, username, channel, created_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback, username, channel, created_at], (err, result) => {
+    if (err) {
+      console.log(`Database error POST`);
+      res.status(500).send(err.message);
+      return;
+    } else {
+      res.status(200).json({
+        result,
+      })
+    }
+  })
 });
 
 app.get('/link', (req, res) => {
