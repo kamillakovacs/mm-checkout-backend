@@ -75,9 +75,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 })
 
 app.get('/link', (req, res) => {
-  res.json({
-    message: 'http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com Click on the link to submit your feedback.'
-  });
+  res.status(200).send('http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com Click on the link to submit your feedback.');
 });
 
 
