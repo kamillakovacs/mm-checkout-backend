@@ -34,27 +34,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  // let body = req.body
-  // let rating = body.rating;
-  // let feeling = body.feeling;
-  // let finished = body.finished;
-  // let energy = body.energy;
-  // let favorite = body.favorite;
-  // let feedback = body.feedback;
-  // let hardest = body.hardest;
-  // let is_relevant = body.is_relevant;
-  // let whatlearned = body.whatlearned;
-  
-  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body;
-  
-  // let channel = body.channel;
-  // let username = body.username;
-  // let created_at = body.created_at;
-  let token = req.body.token;
-  let mmToken = 1111;
+  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.data;
 
-  // if (token === mmToken) {
-  // if (rating && feeling && finished && energy) {
+  if (rating && feeling && finished && energy) {
     conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
@@ -66,13 +48,8 @@ app.post('/feedback', jsonParser, (req, res) => {
         })
       }
     })
-  // }
-  // } else {
-  //   console.log(`Invalid authentication`);
-  //   res.status(400).send(err.message);
-  //   return;
-  // }
-})
+  }
+});
 
 app.get('/link', (req, res) => {
   let { username, channel_name } = req.params;
@@ -85,7 +62,7 @@ app.get('/link', (req, res) => {
 
 
 app.get('/daily-feedback', (req, res) => {
-  conn.query(`SELECT DISTINCT channel FROM checkout`, (err, result) => {
+  conn.query(`SELECT DISTINCT channel FROM checkout ORDER BY channel ASC`, (err, result) => {
     if (err) {
       console.log(`Database error daily-feedback`);
       res.status(500).send(err.message);
@@ -114,7 +91,6 @@ app.get('/checkouts/:channel', (req, res) => {
       res.status(500).send('Database error');
       return;
     } else if (req.query.day) { 
-      console.log('1234')
       res.render('channelinfo', {
         results: filteredByDate,
         days: uniqueDates,
