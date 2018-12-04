@@ -75,10 +75,10 @@ app.post('/feedback', jsonParser, (req, res) => {
 })
 
 app.get('/link', (req, res) => {
-  console.log(req.params);
-  const { username, channel_name } = req.params;
-  console.log(`${username}, ${channel_name}`);
-  res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username} Click on the link to submit your feedback.`);
+  console.log(req.param);
+  const { user_name, channel_name } = req.param;
+  console.log(`${user_name}, ${channel_name}`);
+  res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name} Click on the link to submit your feedback.`);
 });
 
 
