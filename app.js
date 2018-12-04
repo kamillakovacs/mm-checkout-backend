@@ -34,10 +34,17 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body.data;
+  const rating = Object.values(req.body)[0],
+    feeling = Object.values(req.body)[1],
+    finished = Object.values(req.body)[2],
+    energy = Object.values(req.body)[3],
+    favorite = Object.values(req.body)[4],
+    hardest = Object.values(req.body)[5],
+    whatlearned = Object.values(req.body)[6],
+    feedback = Object.values(req.body)[7];
 
   if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
+    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback) values (?, ?, ?, ?, ?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback], (err, result) => {
       if (err) {
         console.log(`Database error POST`);
         res.status(500).send(err.message);
@@ -59,7 +66,6 @@ app.get('/link', (req, res) => {
     "message": "Click on the link to submit your feedback."
   });
 });
-
 
 app.get('/daily-feedback', (req, res) => {
   conn.query(`SELECT DISTINCT channel FROM checkout ORDER BY channel ASC`, (err, result) => {
