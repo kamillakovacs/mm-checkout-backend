@@ -34,54 +34,37 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  // let body = req.body
-  // let rating = body.rating;
-  // let feeling = body.feeling;
-  // let finished = body.finished;
-  // let energy = body.energy;
-  // let favorite = body.favorite;
-  // let feedback = body.feedback;
-  // let hardest = body.hardest;
-  // let is_relevant = body.is_relevant;
-  // let whatlearned = body.whatlearned;
+  const rating = Object.values(req.body)[0],
+    feeling = Object.values(req.body)[1],
+    finished = Object.values(req.body)[2],
+    energy = Object.values(req.body)[3],
+    favorite = Object.values(req.body)[4],
+    hardest = Object.values(req.body)[5],
+    whatlearned = Object.values(req.body)[6],
+    feedback = Object.values(req.body)[7];
 
-  const {rating, feeling, finished, energy, favorite, feedback, hardest, is_relevant, whatlearned} = req.body;
-
-  // let channel = body.channel;
-  // let username = body.username;
-  // let created_at = body.created_at;
-  let token = req.body.token;
-  let mmToken = 1111;
-
-  // if (token === mmToken) {
-  // if (rating && feeling && finished && energy) {
-  conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
-    if (err) {
-      console.log(`Database error POST`);
-      res.status(500).send(err.message);
-      return;
-    } else {
-      res.status(200).json({
-        result,
-      })
-    }
-  })
-  // }
-  // } else {
-  //   console.log(`Invalid authentication`);
-  //   res.status(400).send(err.message);
-  //   return;
-  // }
-})
+  if (rating && feeling && finished && energy) {
+    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback) values (?, ?, ?, ?, ?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback], (err, result) => {
+      if (err) {
+        console.log(`Database error POST`);
+        res.status(500).send(err.message);
+        return;
+      } else {
+        res.status(200).json({
+          result,
+        })
+      }
+    })
+  }
+});
 
 app.get('/link', (req, res) => {
   const { user_name, channel_name } = req.query;
   res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name} Click on the link to submit your feedback.`);
 });
 
-
 app.get('/daily-feedback', (req, res) => {
-  conn.query(`SELECT DISTINCT channel FROM checkout`, (err, result) => {
+  conn.query(`SELECT DISTINCT channel FROM checkout ORDER BY channel ASC`, (err, result) => {
     if (err) {
       console.log(`Database error daily-feedback`);
       res.status(500).send(err.message);
@@ -109,8 +92,7 @@ app.get('/checkouts/:channel', (req, res) => {
       console.log(err.toString());
       res.status(500).send('Database error');
       return;
-    } else if (req.query.day) {
-      console.log('1234')
+    } else if (req.query.day) { 
       res.render('channelinfo', {
         results: filteredByDate,
         days: uniqueDates,
