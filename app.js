@@ -1,12 +1,12 @@
 'use strict'
 
 const express = require('express'),
-  app = express(),
-  mysql = require('mysql'),
-  path = require('path'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  jsonParser = bodyParser.json();
+app = express(),
+mysql = require('mysql'),
+path = require('path'),
+cors = require('cors'),
+bodyParser = require('body-parser'),
+jsonParser = bodyParser.json();
 
 const conn = mysql.createConnection({
   host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
@@ -55,17 +55,17 @@ app.post('/feedback', jsonParser, (req, res) => {
 
   // if (token === mmToken) {
   // if (rating && feeling && finished && energy) {
-    conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
-      if (err) {
-        console.log(`Database error POST`);
-        res.status(500).send(err.message);
-        return;
-      } else {
-        res.status(200).json({
-          result,
-        })
-      }
-    })
+  conn.query(`INSERT INTO checkout (rating, feeling, finished, energy) values (?, ?, ?, ?);`, [rating, feeling, finished, energy], (err, result) => {
+    if (err) {
+      console.log(`Database error POST`);
+      res.status(500).send(err.message);
+      return;
+    } else {
+      res.status(200).json({
+        result,
+      })
+    }
+  })
   // }
   // } else {
   //   console.log(`Invalid authentication`);
@@ -75,7 +75,9 @@ app.post('/feedback', jsonParser, (req, res) => {
 })
 
 app.get('/link', (req, res) => {
-  res.status(200).send('http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com Click on the link to submit your feedback.');
+  const { username, channel_name } = req.params;
+  console.log(`${username}, ${channel_name}`);
+  res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username} Click on the link to submit your feedback.`);
 });
 
 
