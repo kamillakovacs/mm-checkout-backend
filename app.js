@@ -61,9 +61,8 @@ app.post('/feedback', jsonParser, (req, res) => {
 });
 
 app.get('/link', (req, res) => {
-  let { username, channel_name } = req.params;
-  console.log(`${username}, ${channel_name}`);
-  res.send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`)
+  const { user_name, channel_name } = req.query;
+  res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username} Click on the link to submit your feedback.`)
 });
 
 app.get('/daily-feedback', (req, res) => {
@@ -88,7 +87,7 @@ app.get('/checkouts/:channel', (req, res) => {
 
     let dates = results.map(feedback => feedback.created_at);
     let uniqueDates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-    
+
     let channel = req.params.channel
 
     if (err) {
