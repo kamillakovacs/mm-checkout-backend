@@ -1,5 +1,6 @@
 'use strict'
 
+require('dotenv').config()
 const express = require('express'),
   app = express(),  
   mysql = require('mysql'),
