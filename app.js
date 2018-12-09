@@ -62,8 +62,8 @@ app.post('/feedback', jsonParser, (req, res) => {
 });
 
 app.get('/link', (req, res) => {
-  const { username, channel_name } = req.query;
-  res.status(200).send(`Click on the link to submit your feedback: http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`)
+  const { user_name, channel_name } = req.query;
+  res.status(200).send(`Click on the link to submit your feedback: http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
 });
 
 app.get('/daily-feedback', (req, res) => {
