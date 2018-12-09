@@ -9,7 +9,7 @@
 4. Deploy to AWS - done
 
 ## Frontend: 
-1. Create checkout form as Mattermost slash command
+1. Create checkout form as Mattermost slash command - done
 2. Use React :) - done
 3. Ensure numbers and scripts all in one form - done
 4. Ensure that pressing submit button sends feedback to backend to submit to database, with correct body names - done
