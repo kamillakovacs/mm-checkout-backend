@@ -1,6 +1,5 @@
 'use strict'
 
-require('dotenv').config()
 const express = require('express'),
   app = express(),  
   mysql = require('mysql'),
@@ -10,10 +9,11 @@ const express = require('express'),
   jsonParser = bodyParser.json();
 
 const conn = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE
+  host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
+  user: 'mattermostdb',
+  password: 'mattermost',
+  database: 'mattermost',
+  port: 3306
 });
 
 conn.connect((err) => {
@@ -63,7 +63,6 @@ app.post('/feedback', jsonParser, (req, res) => {
 
 app.get('/link', (req, res) => {
   const { username, channel_name } = req.query;
-  console.log(`${username}, ${channel_name}`);
   res.status(200).send(`Click on the link to submit your feedback: http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`)
 });
 
