@@ -9,10 +9,10 @@ const express = require('express'),
   jsonParser = bodyParser.json();
 
 const conn = mysql.createConnection({
-  host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
-  user: 'mattermostdb',
-  password: 'mattermost',
-  database: 'mattermost',
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 
 conn.connect((err) => {
