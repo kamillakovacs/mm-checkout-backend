@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  console.log(req)
+  // console.log(req)
   const rating = Object.values(req.body.data)[0],
     feeling = Object.values(req.body.data)[1],
     finished = Object.values(req.body.data)[2],
@@ -63,7 +63,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 
 app.get('/link', (req, res) => {
   const { user_name, channel_name } = req.query;
-  res.status(200).send(`Click on the link to submit your feedback: http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
+  res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
 });
 
 app.get('/daily-feedback', (req, res) => {
