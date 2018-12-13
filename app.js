@@ -112,15 +112,21 @@ app.post('/link', jsonParser, (req, res) => {
         "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
         "actions": [
           {
-            "name": "Select an option...",
+            "name": "Ephemeral Message",
             "integration": {
-              "url": "http://127.0.0.1:7357/action_options",
+              "url": "http://127.0.0.1:7357",
               "context": {
-                "action": "do_something"
+                "action": "do_something_ephemeral"
               }
-            },
-            "type": "select",
-            "data_source": "users"
+            }
+          }, {
+            "name": "Update",
+            "integration": {
+              "url": "http://127.0.0.1:7357",
+              "context": {
+                "action": "do_something_update"
+              }
+            }
           }
         ]
       }
