@@ -87,29 +87,42 @@ app.post('/link', jsonParser, (req, res) => {
         "author_link": "http://www.mattermost.org/",
         "title": "Example Attachment",
         "title_link": "http://docs.mattermost.com/developer/message-attachments.html",
-        "fields": [
+        // "fields": [
+        //   {
+        //     "short":false,
+        //     "title":"Long Field",
+        //     "value":"Testing with a very long piece of text that will take up the whole width of the table. And then some more text to make it extra long."
+        //   },
+        //   {
+        //     "short":true,
+        //     "title":"Column One",
+        //     "value":"Testing"
+        //   },
+        //   {
+        //     "short":true,
+        //     "title":"Column Two",
+        //     "value":"Testing"
+        //   },
+        //   {
+        //   "short":false,
+        //   "title":"Another Field",
+        //   "value":"Testing"
+        //   }
+        // ],
+        "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
+        "actions": [
           {
-            "short":false,
-            "title":"Long Field",
-            "value":"Testing with a very long piece of text that will take up the whole width of the table. And then some more text to make it extra long."
-          },
-          {
-            "short":true,
-            "title":"Column One",
-            "value":"Testing"
-          },
-          {
-            "short":true,
-            "title":"Column Two",
-            "value":"Testing"
-          },
-          {
-          "short":false,
-          "title":"Another Field",
-          "value":"Testing"
+            "name": "Select an option...",
+            "integration": {
+              "url": "http://127.0.0.1:7357/action_options",
+              "context": {
+                "action": "do_something"
+              }
+            },
+            "type": "select",
+            "data_source": "users"
           }
-        ],
-        "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png"
+        ]
       }
     ]
   })
