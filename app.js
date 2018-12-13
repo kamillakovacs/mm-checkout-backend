@@ -61,7 +61,7 @@ app.post('/feedback', jsonParser, (req, res) => {
   })
 });
 
-app.post('/link', jsonParser, (req, res) => {
+app.post('/startcheckout', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.query;
   res.status(200).send({
     "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
@@ -72,21 +72,21 @@ app.post('/link', jsonParser, (req, res) => {
     "text": "",
     "timestamp": "1445532266",
     "token": "hensght1ijyjjxpk56qpg98iny",
-    "trigger_word": "/checkout",
+    "trigger_word": "checkout",
     "user_id": "rnina9994bde8mua79zqcg5hmo",
     "user_name": user_name,
     "file_ids": "znana9194bde8mua70zqcg5hmo", 
     "attachments": [
       {
-        "fallback": "test",
-        "color": "#FF8000",
-        "pretext": "This is optional pretext that shows above the attachment.",
-        "text": "This is the text of the attachment. It should appear just above an image of the Mattermost logo. The left border of the attachment should be colored orange, and below the image it should include additional fields that are formatted in columns. At the top of the attachment, there should be an author name followed by a bolded title. Both the author name and the title should be hyperlinks.",
-        "author_name": "Mattermost",
+        "fallback": "checkout",
+        "color": "#007930",
+        // "pretext": "This is optional pretext that shows above the attachment.",
+        "text": "Hi, like, please fill out the checkout form.",
+        "author_name": "Green Fox Academy",
         "author_icon": "http://www.mattermost.org/wp-content/uploads/2016/04/icon_WS.png",
-        "author_link": "http://www.mattermost.org/",
-        "title": "Example Attachment",
-        "title_link": "http://docs.mattermost.com/developer/message-attachments.html",
+        "author_link": "https://www.greenfoxacademy.com/",
+        "title": "Greenfox Checkout",
+        // "title_link": "http://docs.mattermost.com/developer/message-attachments.html",
         // "fields": [
         //   {
         //     "short":false,
@@ -109,31 +109,28 @@ app.post('/link', jsonParser, (req, res) => {
         //   "value":"Testing"
         //   }
         // ],
-        "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
+        // "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
         "actions": [
           {
             "name": "Ephemeral Message",
             "integration": {
-              "url": "http://127.0.0.1:7357",
+              "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/link",
               "context": {
                 "action": "do_something_ephemeral"
               }
             }
-          }, {
-            "name": "Update",
-            "integration": {
-              "url": "http://127.0.0.1:7357",
-              "context": {
-                "action": "do_something_update"
-              }
-            }
-          }
+          } 
         ]
       }
     ]
   })
-  // `Feedback form:\nhttp://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
 });
+
+app.get('/link', (req, res) => {
+  const { user_name, channel_name } = req.query;
+  res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
+});
+
 
 app.get('/daily-feedback', (req, res) => {
   conn.query(`SELECT DISTINCT channel FROM checkout ORDER BY channel ASC`, (err, result) => {
