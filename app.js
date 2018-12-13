@@ -72,7 +72,7 @@ app.post('/startcheckout', jsonParser, (req, res) => {
     "post_id": "axdygg1957njfe5pu38saikdho",
     "text": "",
     "timestamp": "1445532266",
-    "token": "hensght1ijyjjxpk56qpg98iny",
+    "token": "x8hw844oi7nqfns7ou1pjydbfy",
     "trigger_word": "checkout",
     "user_id": "rnina9994bde8mua79zqcg5hmo",
     "user_name": user_name,
