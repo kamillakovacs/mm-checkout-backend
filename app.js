@@ -61,9 +61,23 @@ app.post('/feedback', jsonParser, (req, res) => {
   })
 });
 
-app.get('/link', (req, res) => {
+app.post('/link', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.query;
-  res.status(200).send(`Feedback form:\nhttp://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
+  res.status(200).send({
+    "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
+    "channel_name": channel_name,
+    "team_domain": "someteam",
+    "team_id": "kwoknj9nwpypzgzy78wkw516qe",
+    "post_id": "axdygg1957njfe5pu38saikdho",
+    "text": "some text here",
+    "timestamp": "1445532266",
+    "token": "hensght1ijyjjxpk56qpg98iny",
+    "trigger_word": "/checkout",
+    "user_id": "rnina9994bde8mua79zqcg5hmo",
+    "user_name": user_name,
+    "file_ids": "znana9194bde8mua70zqcg5hmo"
+  })
+  // `Feedback form:\nhttp://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
 });
 
 app.get('/daily-feedback', (req, res) => {
