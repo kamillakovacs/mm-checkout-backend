@@ -63,28 +63,28 @@ app.post('/feedback', jsonParser, (req, res) => {
 app.post('/startcheckout', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.query;
   res.status(200).send({
-    "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
+    // "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
     "channel_name": channel_name,
-    "team_domain": "someteam",
-    "team_id": "kwoknj9nwpypzgzy78wkw516qe",
-    "post_id": "axdygg1957njfe5pu38saikdho",
+    // "team_domain": "someteam",
+    // "team_id": "kwoknj9nwpypzgzy78wkw516qe",
+    // "post_id": "axdygg1957njfe5pu38saikdho",
     "text": "",
     "timestamp": "1445532266",
     "token": "x8hw844oi7nqfns7ou1pjydbfy",
     "trigger_word": "checkout",
     "user_id": "rnina9994bde8mua79zqcg5hmo",
     "user_name": user_name,
-    "file_ids": "znana9194bde8mua70zqcg5hmo", 
+    // "file_ids": "znana9194bde8mua70zqcg5hmo", 
     "attachments": [
       {
         "fallback": "checkout",
         "color": "#007930",
         // "pretext": "This is optional pretext that shows above the attachment.",
         "text": "Hi, click on the link above to fill out the checkout form.",
-        "author_name": "Green Fox Academy",
+        "author_name": "Green Fox Checkout",
         "author_icon": "http://www.mattermost.org/wp-content/uploads/2016/04/icon_WS.png",
         "author_link": "https://www.greenfoxacademy.com/",
-        "title": "Greenfox Checkout Form",
+        "title": "Click here to fill out the daily checkout form",
         "title_link": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/",
         // "actions": [
         //   {
