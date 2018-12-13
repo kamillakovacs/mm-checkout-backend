@@ -80,10 +80,10 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         "fallback": "checkout",
         "color": "#007930",
         // "pretext": "This is optional pretext that shows above the attachment.",
-        // "text": "Hi, click on the link above to fill out the checkout form.",
+        "text": "Thank you for your feedback!",
         "author_name": "Green Fox Checkout",
-        // "author_icon": "http://www.mattermost.org/wp-content/uploads/2016/04/icon_WS.png",
-        // "author_link": "https://www.greenfoxacademy.com/",
+        "author_icon": "https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3317/s300/greenfoxacademylogo.jpg",
+        "author_link": "https://www.greenfoxacademy.com/",
         "title": "Click here to fill out the daily checkout form",
         "title_link": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/",
         // "actions": [
