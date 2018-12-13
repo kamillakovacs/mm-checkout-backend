@@ -62,8 +62,6 @@ app.post('/feedback', jsonParser, (req, res) => {
 
 app.post('/startcheckout', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.query;
-  
-  
   res.status(200).send({
     "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
     "channel_name": channel_name,
@@ -82,55 +80,28 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         "fallback": "checkout",
         "color": "#007930",
         // "pretext": "This is optional pretext that shows above the attachment.",
-        "text": "Hi, like, please fill out the checkout form.",
+        "text": "Hi, click on the link above to fill out the checkout form.",
         "author_name": "Green Fox Academy",
         "author_icon": "http://www.mattermost.org/wp-content/uploads/2016/04/icon_WS.png",
         "author_link": "https://www.greenfoxacademy.com/",
-        "title": "Greenfox Checkout",
-        // "title_link": "http://docs.mattermost.com/developer/message-attachments.html",
-        // "fields": [
+        "title": "Greenfox Checkout Form",
+        "title_link": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/",
+        // "actions": [
         //   {
-        //     "short":false,
-        //     "title":"Long Field",
-        //     "value":"Testing with a very long piece of text that will take up the whole width of the table. And then some more text to make it extra long."
-        //   },
-        //   {
-        //     "short":true,
-        //     "title":"Column One",
-        //     "value":"Testing"
-        //   },
-        //   {
-        //     "short":true,
-        //     "title":"Column Two",
-        //     "value":"Testing"
-        //   },
-        //   {
-        //   "short":false,
-        //   "title":"Another Field",
-        //   "value":"Testing"
+        //     "type": "button",
+        //     "text": "Feedback form",
+        //     "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/"
         //   }
-        // ],
-        // "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
-        "actions": [
-          {
-            "type": "button",
-            "text": "Feedback form",
-            "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/"
-          }
-        ]
+        // ]
       }
     ]
   })
 });
 
-app.get('/link', (req, res) => {
-  const { user_name, channel_name } = req.query;
-  function openForm(url) {
-    const newwindow = window.open(url, '_blank');
-    newwindow.focus();
-  }
-  res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
-});
+// app.get('/link', (req, res) => {
+//   const { user_name, channel_name } = req.query;
+//   res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
+// });
 
 
 app.get('/daily-feedback', (req, res) => {
