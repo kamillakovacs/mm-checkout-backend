@@ -61,7 +61,10 @@ app.post('/feedback', jsonParser, (req, res) => {
 });
 
 app.post('/startcheckout', jsonParser, (req, res) => {
-  const { user_name, channel_name } = req.query;
+  console.log('THIS IS THE PLACE')
+  console.log(req)
+  const { user_name, channel_name } = req.body;
+  console.log( user_name, channel_name);
   res.status(200).send({
     // "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
     "channel_name": channel_name,
