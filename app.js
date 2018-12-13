@@ -69,7 +69,7 @@ app.post('/link', jsonParser, (req, res) => {
     "team_domain": "someteam",
     "team_id": "kwoknj9nwpypzgzy78wkw516qe",
     "post_id": "axdygg1957njfe5pu38saikdho",
-    "text": "some text here",
+    "text": "",
     "timestamp": "1445532266",
     "token": "hensght1ijyjjxpk56qpg98iny",
     "trigger_word": "/checkout",
