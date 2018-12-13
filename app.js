@@ -35,7 +35,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/feedback', jsonParser, (req, res) => {
-  // console.log(req)
   const rating = Object.values(req.body.data)[0],
     feeling = Object.values(req.body.data)[1],
     finished = Object.values(req.body.data)[2],
@@ -63,6 +62,8 @@ app.post('/feedback', jsonParser, (req, res) => {
 
 app.post('/startcheckout', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.query;
+  
+  
   res.status(200).send({
     "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
     "channel_name": channel_name,
@@ -112,14 +113,10 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         // "image_url": "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png",
         "actions": [
           {
-            "name": "Ephemeral Message",
-            "integration": {
-              "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/link",
-              "context": {
-                "action": "do_something_ephemeral"
-              }
-            }
-          } 
+            "type": "button",
+            "text": "Feedback form",
+            "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/"
+          }
         ]
       }
     ]
@@ -128,6 +125,10 @@ app.post('/startcheckout', jsonParser, (req, res) => {
 
 app.get('/link', (req, res) => {
   const { user_name, channel_name } = req.query;
+  function openForm(url) {
+    const newwindow = window.open(url, '_blank');
+    newwindow.focus();
+  }
   res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
 });
 
