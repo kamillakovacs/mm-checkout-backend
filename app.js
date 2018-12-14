@@ -69,7 +69,7 @@ app.post('/startcheckout', jsonParser, (req, res) => {
     // "team_id": "kwoknj9nwpypzgzy78wkw516qe",
     // "post_id": "axdygg1957njfe5pu38saikdho",
     "text": "",
-    "timestamp": "1445532266",
+    // "timestamp": "1445532266",
     "token": "x8hw844oi7nqfns7ou1pjydbfy",
     "trigger_word": "checkout",
     "user_id": "rnina9994bde8mua79zqcg5hmo",
@@ -85,7 +85,7 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         "author_icon": "https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3317/s300/greenfoxacademylogo.jpg",
         "author_link": "https://www.greenfoxacademy.com/",
         "title": "Click here to fill out the daily checkout form",
-        "title_link": `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`,
+        "title_link": `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/submission`,
         // "actions": [
         //   {
         //     "type": "button",
@@ -95,6 +95,135 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         // ]
       }
     ]
+  })
+});
+
+app.post('/submission', jsonParser, (req, res) => {
+  const { user_name, channel_name } = req.body;
+  res.status(200).send({
+      "trigger_id":"nbt1dxzqwpn6by14sfs66ganhc",
+      "url":"http://localhost:5000/dialog_submit",
+      "dialog":{
+         "callback_id":"somecallbackid",
+         "title":"Test Title",
+         "icon_url":"http://www.mattermost.org/wp-content/uploads/2016/04/icon.png",
+         "elements":[
+            {
+               "display_name":"Display Name",
+               "name":"realname",
+               "type":"text",
+               "subtype":"",
+               "default":"default text",
+               "placeholder":"placeholder",
+               "help_text":"This a test regular input in an interactive dialog triggered by a test integration.",
+               "optional":false,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"",
+               "options":null
+            },
+            {
+               "display_name":"Email",
+               "name":"someemail",
+               "type":"text",
+               "subtype":"email",
+               "default":"",
+               "placeholder":"placeholder@bladekick.com",
+               "help_text":"This a test regular email input in an interactive dialog triggered by a test integration.",
+               "optional":false,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"",
+               "options":null
+            },
+            {
+               "display_name":"Number",
+               "name":"somenumber",
+               "type":"text",
+               "subtype":"number",
+               "default":"",
+               "placeholder":"",
+               "help_text":"",
+               "optional":false,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"",
+               "options":null
+            },
+            {
+               "display_name":"Display Name Long Text Area",
+               "name":"realnametextarea",
+               "type":"textarea",
+               "subtype":"",
+               "default":"",
+               "placeholder":"placeholder",
+               "help_text":"",
+               "optional":true,
+               "min_length":5,
+               "max_length":100,
+               "data_source":"",
+               "options":null
+            },
+            {
+               "display_name":"User Selector",
+               "name":"someuserselector",
+               "type":"select",
+               "subtype":"",
+               "default":"",
+               "placeholder":"Select a user...",
+               "help_text":"",
+               "optional":false,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"users",
+               "options":null
+            },
+            {
+               "display_name":"Channel Selector",
+               "name":"somechannelselector",
+               "type":"select",
+               "subtype":"",
+               "default":"",
+               "placeholder":"Select a channel...",
+               "help_text":"Choose a channel from the list.",
+               "optional":true,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"channels",
+               "options":null
+            },
+            {
+               "display_name":"Option Selector",
+               "name":"someoptionselector",
+               "type":"select",
+               "subtype":"",
+               "default":"",
+               "placeholder":"Select an option...",
+               "help_text":"",
+               "optional":false,
+               "min_length":0,
+               "max_length":0,
+               "data_source":"",
+               "options":[
+                  {
+                     "text":"Option1",
+                     "value":"opt1"
+                  },
+                  {
+                     "text":"Option2",
+                     "value":"opt2"
+                  },
+                  {
+                     "text":"Option3",
+                     "value":"opt3"
+                  }
+               ]
+            }
+         ],
+         "submit_label":"Submit Test",
+         "notify_on_cancel":true,
+         "state":"somestate"
+   }
   })
 });
 
