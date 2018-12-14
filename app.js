@@ -44,7 +44,7 @@ app.post('/feedback', jsonParser, (req, res) => {
     whatlearned = Object.values(req.body.data)[6],
     feedback = Object.values(req.body.data)[7],
     username = req.body.user_name,
-    channel = req.body.channel_name;
+    channel = req.body.channel_name,
     created_at = req.body.date;
 
   conn.query(`INSERT INTO checkout (rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback, username, channel, created_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [rating, feeling, finished, energy, favorite, hardest, whatlearned, feedback, username, channel, created_at], (err, result) => {
