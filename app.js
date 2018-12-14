@@ -43,7 +43,7 @@ app.post('/feedback', jsonParser, (req, res) => {
     hardest = Object.values(req.body.data)[5],
     whatlearned = Object.values(req.body.data)[6],
     feedback = Object.values(req.body.data)[7],
-    username = req.body.username,
+    username = req.body.user_name,
     channel = req.body.channel_name;
     created_at = req.body.date;
 
@@ -61,10 +61,7 @@ app.post('/feedback', jsonParser, (req, res) => {
 });
 
 app.post('/startcheckout', jsonParser, (req, res) => {
-  console.log('THIS IS THE PLACE')
-  console.log(req)
   const { user_name, channel_name } = req.body;
-  console.log( user_name, channel_name);
   res.status(200).send({
     // "channel_id": "hawos4dqtby53pd64o4a4cmeoo",
     "channel_name": channel_name,
@@ -100,11 +97,6 @@ app.post('/startcheckout', jsonParser, (req, res) => {
     ]
   })
 });
-
-// app.get('/link', (req, res) => {
-//   const { user_name, channel_name } = req.query;
-//   res.status(200).redirect(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name}`)
-// });
 
 
 app.get('/daily-feedback', (req, res) => {
