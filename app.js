@@ -85,7 +85,7 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         "author_icon": "https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3317/s300/greenfoxacademylogo.jpg",
         "author_link": "https://www.greenfoxacademy.com/",
         "title": "Click here to fill out the daily checkout form",
-        "title_link": `http://mm-checkout.us-east-1.elasticbeanstalk.com/submission`,
+        "title_link": "http://mm-checkout.us-east-1.elasticbeanstalk.com/submission",
         // "actions": [
         //   {
         //     "type": "button",
@@ -101,8 +101,8 @@ app.post('/startcheckout', jsonParser, (req, res) => {
 app.post('/submission', jsonParser, (req, res) => {
   const { user_name, channel_name } = req.body;
   res.status(200).send({
-      "trigger_id":"nbt1dxzqwpn6by14sfs66ganhc",
-      "url":"http://mm-checkout.us-east-1.elasticbeanstalk.com//feedback",
+      "trigger_id":"x8hw844oi7nqfns7ou1pjydbfy",
+      "url":"http://mm-checkout.us-east-1.elasticbeanstalk.com/feedback",
       "dialog":{
          "callback_id":"somecallbackid",
          "title":"Test Title",
