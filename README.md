@@ -4,7 +4,7 @@
 
 ## Backend: 
 1. Send POST request with feedback to database - done
-2. Ensure authentication works
+2. Ensure authentication works - done, with mattermost token/message
 3. Make sure channel pages work and list all feedback by date/channel as needed - done
 4. Deploy to AWS - done
 
@@ -13,7 +13,7 @@
 2. Use React :) - done
 3. Ensure numbers and scripts all in one form - done
 4. Ensure that pressing submit button sends feedback to backend to submit to database, with correct body names - done
-5. Make it pretty :) - done
+5. Make it pretty :) 
 6. Deploy to AWS - done
 
 ## Database: 
