@@ -86,146 +86,144 @@ app.post('/startcheckout', jsonParser, (req, res) => {
         "author_link": "https://www.greenfoxacademy.com/",
         "title": "Click here to fill out the daily checkout form",
         "title_link": "http://mm-checkout.us-east-1.elasticbeanstalk.com/submission",
-        // "actions": [
-        //   {
-        //     "type": "button",
-        //     "text": "Feedback form",
-        //     "url": "http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com/"
-        //   }
-        // ]
+        "actions": [
+          {
+            // "trigger_id":"",
+            "url":"http://mm-checkout.us-east-1.elasticbeanstalk.com/feedback",
+            "dialog":{
+              "callback_id":"somecallbackid",
+              "title":"Checkout Form",
+              "icon_url":"http://www.mattermost.org/wp-content/uploads/2016/04/icon.png",
+              "elements":[
+                  {
+                    "display_name":"Display Name",
+                    "name":"realname",
+                    "type":"text",
+                    "subtype":"",
+                    "default":"default text",
+                    "placeholder":"placeholder",
+                    "help_text":"This a test regular input in an interactive dialog triggered by a test integration.",
+                    "optional":false,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"",
+                    "options":null
+                  },
+                  {
+                    "display_name":"Email",
+                    "name":"someemail",
+                    "type":"text",
+                    "subtype":"email",
+                    "default":"",
+                    "placeholder":"placeholder@bladekick.com",
+                    "help_text":"This a test regular email input in an interactive dialog triggered by a test integration.",
+                    "optional":false,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"",
+                    "options":null
+                  },
+                  {
+                    "display_name":"Number",
+                    "name":"somenumber",
+                    "type":"text",
+                    "subtype":"number",
+                    "default":"",
+                    "placeholder":"",
+                    "help_text":"",
+                    "optional":false,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"",
+                    "options":null
+                  },
+                  {
+                    "display_name":"Display Name Long Text Area",
+                    "name":"realnametextarea",
+                    "type":"textarea",
+                    "subtype":"",
+                    "default":"",
+                    "placeholder":"placeholder",
+                    "help_text":"",
+                    "optional":true,
+                    "min_length":5,
+                    "max_length":100,
+                    "data_source":"",
+                    "options":null
+                  },
+                  {
+                    "display_name":"User Selector",
+                    "name":"someuserselector",
+                    "type":"select",
+                    "subtype":"",
+                    "default":"",
+                    "placeholder":"Select a user...",
+                    "help_text":"",
+                    "optional":false,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"users",
+                    "options":null
+                  },
+                  {
+                    "display_name":"Channel Selector",
+                    "name":"somechannelselector",
+                    "type":"select",
+                    "subtype":"",
+                    "default":"",
+                    "placeholder":"Select a channel...",
+                    "help_text":"Choose a channel from the list.",
+                    "optional":true,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"channels",
+                    "options":null
+                  },
+                  {
+                    "display_name":"Option Selector",
+                    "name":"someoptionselector",
+                    "type":"select",
+                    "subtype":"",
+                    "default":"",
+                    "placeholder":"Select an option...",
+                    "help_text":"",
+                    "optional":false,
+                    "min_length":0,
+                    "max_length":0,
+                    "data_source":"",
+                    "options":[
+                        {
+                          "text":"Option1",
+                          "value":"opt1"
+                        },
+                        {
+                          "text":"Option2",
+                          "value":"opt2"
+                        },
+                        {
+                          "text":"Option3",
+                          "value":"opt3"
+                        }
+                    ]
+                  }
+              ],
+              "submit_label":"Submit Test",
+              "notify_on_cancel":true,
+              "state":"Thanks"
+            }   
+          }
+        ]
       }
     ]
   })
 });
 
-app.post('/submission', jsonParser, (req, res) => {
-  const { user_name, channel_name } = req.body;
-  res.status(200).send({
-      "trigger_id":"x8hw844oi7nqfns7ou1pjydbfy",
-      "url":"http://mm-checkout.us-east-1.elasticbeanstalk.com/feedback",
-      "dialog":{
-         "callback_id":"somecallbackid",
-         "title":"Test Title",
-         "icon_url":"http://www.mattermost.org/wp-content/uploads/2016/04/icon.png",
-         "elements":[
-            {
-               "display_name":"Display Name",
-               "name":"realname",
-               "type":"text",
-               "subtype":"",
-               "default":"default text",
-               "placeholder":"placeholder",
-               "help_text":"This a test regular input in an interactive dialog triggered by a test integration.",
-               "optional":false,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"",
-               "options":null
-            },
-            {
-               "display_name":"Email",
-               "name":"someemail",
-               "type":"text",
-               "subtype":"email",
-               "default":"",
-               "placeholder":"placeholder@bladekick.com",
-               "help_text":"This a test regular email input in an interactive dialog triggered by a test integration.",
-               "optional":false,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"",
-               "options":null
-            },
-            {
-               "display_name":"Number",
-               "name":"somenumber",
-               "type":"text",
-               "subtype":"number",
-               "default":"",
-               "placeholder":"",
-               "help_text":"",
-               "optional":false,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"",
-               "options":null
-            },
-            {
-               "display_name":"Display Name Long Text Area",
-               "name":"realnametextarea",
-               "type":"textarea",
-               "subtype":"",
-               "default":"",
-               "placeholder":"placeholder",
-               "help_text":"",
-               "optional":true,
-               "min_length":5,
-               "max_length":100,
-               "data_source":"",
-               "options":null
-            },
-            {
-               "display_name":"User Selector",
-               "name":"someuserselector",
-               "type":"select",
-               "subtype":"",
-               "default":"",
-               "placeholder":"Select a user...",
-               "help_text":"",
-               "optional":false,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"users",
-               "options":null
-            },
-            {
-               "display_name":"Channel Selector",
-               "name":"somechannelselector",
-               "type":"select",
-               "subtype":"",
-               "default":"",
-               "placeholder":"Select a channel...",
-               "help_text":"Choose a channel from the list.",
-               "optional":true,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"channels",
-               "options":null
-            },
-            {
-               "display_name":"Option Selector",
-               "name":"someoptionselector",
-               "type":"select",
-               "subtype":"",
-               "default":"",
-               "placeholder":"Select an option...",
-               "help_text":"",
-               "optional":false,
-               "min_length":0,
-               "max_length":0,
-               "data_source":"",
-               "options":[
-                  {
-                     "text":"Option1",
-                     "value":"opt1"
-                  },
-                  {
-                     "text":"Option2",
-                     "value":"opt2"
-                  },
-                  {
-                     "text":"Option3",
-                     "value":"opt3"
-                  }
-               ]
-            }
-         ],
-         "submit_label":"Submit Test",
-         "notify_on_cancel":true,
-         "state":"somestate"
-   }
-  })
-});
+// app.post('/submission', jsonParser, (req, res) => {
+//   const { user_name, channel_name } = req.body;
+//   res.status(200).send({
+      
+//   })
+// });
 
 
 app.get('/daily-feedback', (req, res) => {
