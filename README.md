@@ -1,3 +1,7 @@
+## Preview:
+![Feedback Form App](./checkout.gif)
+
+
 # mm-checkout
 
 # Project steps:
