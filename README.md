@@ -1,4 +1,4 @@
-# Checkout Feedback Form Application for Mattermost chat software
+# Checkout Feedback Form Application for Mattermost 
 
 ## Preview:
 ![Feedback Form App](./checkout.gif)
