@@ -3,12 +3,12 @@
 ## Preview:
 ![Feedback Form App](./checkout.gif)
 
-# Next steps:
+## Next steps:
 1. Improve feedback form design 
 2. Integrate form into Mattermost channels via Mattermost's interactive dialog feature
 3. Develop and deploy feedback aggregation feature
 
-# Project steps:
+## Project steps:
 
 ## Backend: 
 1. Send POST request with feedback to database - done
