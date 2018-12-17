@@ -3,6 +3,9 @@
 ## Preview:
 ![Feedback Form App](./checkout.gif)
 
+### Front-End React Form
+![React Form Code]("https://github.com/green-fox-academy/mm-checkout-frontend")
+
 ## Next steps:
 1. Improve feedback form design 
 2. Integrate form into Mattermost channels via Mattermost's interactive dialog feature
