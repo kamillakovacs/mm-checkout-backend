@@ -1,8 +1,7 @@
+# Checkout Feedback App for Mattermost
+
 ## Preview:
 ![Feedback Form App](./checkout.gif)
-
-
-# Checkout Feedback App for Mattermost
 
 # Next steps:
 1. Improve feedback form design 
