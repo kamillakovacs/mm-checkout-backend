@@ -2,7 +2,12 @@
 ![Feedback Form App](./checkout.gif)
 
 
-# mm-checkout
+# Checkout Feedback App for Mattermost
+
+# Next steps:
+1. Improve feedback form design 
+2. Integrate form into Mattermost channels via Mattermost's interactive dialog feature
+3. Develop and deploy feedback aggregation feature
 
 # Project steps:
 
