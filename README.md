@@ -6,13 +6,21 @@
 ### Front-End React Form
 * [React Form Code](https://github.com/green-fox-academy/mm-checkout-frontend)
 
+## Current Features:
+* Slash command integration in Mattermost to retrieve interactive message to direct Green Fox students to a React form link
+* Form using react-jsonschema-form library to submit feedback
+* REST API endpoints to submit and retrieve feedback from MySQL database, using superuser and fetch
+* DOM manipulation with Node.JS Npm Express and EJS templating to display feedback from database based on Mattermost channel and date
+* Mattermost hosted on AWS EC2 instance using Docker container
+* React-based form hosted on AWS S3 bucket
+* Checkout application itself hosted on AWS Elastic Beanstalk environment using continuous deployment via Jenkins (using GitHub webhook and Docker)
+
 ## Next steps:
 1. Improve feedback form design 
 2. Integrate form into Mattermost channels via Mattermost's interactive dialog feature
 3. Develop and deploy feedback aggregation feature
 
 ## Project steps:
-
 ### Backend: 
 1. Send POST request with feedback to database - done
 2. Ensure authentication works - done, with mattermost token/message
