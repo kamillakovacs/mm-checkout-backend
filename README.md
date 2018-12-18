@@ -5,7 +5,7 @@
 
 ## Current Features:
 * Slash command integration in Mattermost to retrieve interactive message to direct Green Fox students to a React form link
-* Form using react-jsonschema-form library to submit feedback
+* Form using react-jsonschema-form library to submit feedback, passing down specific Mattermost channel and username into form URL
 * REST API endpoints to submit and retrieve feedback from MySQL database, using superuser and fetch
 * DOM manipulation with Node.JS Npm Express and EJS templating to display feedback from database based on Mattermost channel and date
 * Mattermost hosted on AWS EC2 instance using Docker container
