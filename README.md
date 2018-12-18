@@ -8,6 +8,7 @@
 * Form using react-jsonschema-form library to submit feedback, passing down specific Mattermost channel and username into form URL as query string
 * REST API endpoints to submit and retrieve feedback from MySQL database, using superagent and fetch
 * DOM manipulation with Node.JS Npm Express and EJS templating to display feedback from database based on Mattermost channel and date
+* Bootstrap for CSS layout
 * Mattermost hosted on AWS EC2 instance using Docker container
 * React-based form hosted on AWS S3 bucket
 * Checkout application itself hosted on AWS Elastic Beanstalk environment using continuous deployment via Jenkins (using GitHub webhook and Docker)
